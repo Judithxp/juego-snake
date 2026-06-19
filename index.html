@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Game - VS Code</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Puntuación: <span id="score">0</span></h1>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        
+        <!-- Botonera táctil para jugar en el móvil -->
+        <div class="controls">
+            <button class="btn" id="btnUp">🔼</button>
+            <div class="row">
+                <button class="btn" id="btnLeft">◀️</button>
+                <button class="btn" id="btnRight">▶️</button>
+            </div>
+            <button class="btn" id="btnDown">🔽</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
