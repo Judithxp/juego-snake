@@ -31,21 +31,21 @@ function main() {
         return;
     }
 
-    // 1. Dibujamos la "foto fija" inicial (para que no salga el cuadro negro)
+    // 1. Esto limpia el tablero y dibuja la manzana y la serpiente quieta al principio
     clearCanvas();
     drawFood();
     drawSnake();
 
-    // 2. Si está pausado, se queda en bucle aquí dibujando pero SIN mover la serpiente
+    // 2. Si el juego arranca pausado, se queda repitiendo este bucle quieto
     if (juegoPausado) {
         setTimeout(main, gameSpeed);
         return; 
     }
 
-    // 3. Si NO está pausado, avanza y mueve a la serpiente normalmente
+    // 3. Cuando le das a PLAY, pasa por aquí y la serpiente empieza a correr
     setTimeout(function onTick() {
         moveSnake();
-        main(); // Volver a llamar al bucle
+        main(); // Mantiene vivo el bucle del juego
     }, gameSpeed);
 }
 
@@ -165,7 +165,7 @@ function resetGame() {
     main();
 }
 function alternarPausa() {
-    juegoPausado = !juegoPausado; // Si era true pasa a false, y al revés
+    juegoPausado = !juegoPausado; // Cambia de true a false, o de false a true
     
     const boton = document.getElementById("btnPausa");
     if (juegoPausado) {
