@@ -21,9 +21,15 @@ let dy = 0;
 
 let score = 0;
 let gameSpeed = 150; // Milisegundos entre actualizaciones (más bajo = más rápido)
+let juegoPausado = true;//El juego empieza congelado
 
 // El bucle principal del juego
 function main() {
+    if (juegoPausado) {
+        //Volvemos a llamar a main en el siguiente ciclo para que la pantalla se quede esperando
+        setTimeout(main, gamespeed);
+        return; //frenamos aquí, no se ejecuta el movimiento de abajo
+    }
     if (hasGameEnded()) {
         alert(`🎯 Juego Terminado. Tu puntuación fue: ${score}`);
         resetGame();
@@ -153,4 +159,14 @@ function resetGame() {
     scoreElement.innerText = score;
     generateFood();
     main();
+}
+function alternarPausa() {
+    juegoPausado = !juegoPausado; // Si era true pasa a false, y al revés
+    
+    const boton = document.getElementById("btnPausa");
+    if (juegoPausado) {
+        boton.innerText = "PLAY";
+    } else {
+        boton.innerText = "PAUSA";
+    }
 }
