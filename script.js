@@ -25,22 +25,26 @@ let juegoPausado = true;//El juego empieza congelado
 
 // El bucle principal del juego
 function main() {
-    if (juegoPausado) {
-        //Volvemos a llamar a main en el siguiente ciclo para que la pantalla se quede esperando
-        setTimeout(main, gamespeed);
-        return; //frenamos aquí, no se ejecuta el movimiento de abajo
-    }
     if (hasGameEnded()) {
-        alert(`🎯 Juego Terminado. Tu puntuación fue: ${score}`);
+        alert(`Juego Terminado. Tu puntuación fue: ${score}`);
         resetGame();
         return;
     }
 
+    // 1. Dibujamos la "foto fija" inicial (para que no salga el cuadro negro)
+    clearCanvas();
+    drawFood();
+    drawSnake();
+
+    // 2. Si está pausado, se queda en bucle aquí dibujando pero SIN mover la serpiente
+    if (juegoPausado) {
+        setTimeout(main, gameSpeed);
+        return; 
+    }
+
+    // 3. Si NO está pausado, avanza y mueve a la serpiente normalmente
     setTimeout(function onTick() {
-        clearCanvas();
-        drawFood();
         moveSnake();
-        drawSnake();
         main(); // Volver a llamar al bucle
     }, gameSpeed);
 }
